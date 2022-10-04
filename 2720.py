@@ -16,21 +16,6 @@
     2 1
     32 4 5 1
     25 10 1 2
- 
-    Staged: 
-    [
-        (3, 2, [
-                {'i': 1, 'h': 1, 'w': 2, 'l': 3}, 
-                {'i': 2, 'h': 2, 'w': 1, 'l': 1}, 
-                {'i': 3, 'h': 2, 'w': 2, 'l': 1}
-            ]
-        ), 
-        (2, 1, [
-                {'i': 32, 'h': 4, 'w': 5, 'l': 1}, 
-                {'i': 25, 'h': 10, 'w': 1, 'l': 20}
-                ]
-        )
-    ]  
 
     Curated:
     [
@@ -47,22 +32,27 @@
 t = int(input())
 p = [None] * t
 
-for i in range(t):    
-    nk = [int(x) for x in input().split()]
+if t<=20:
+    for i in range(t):
+        nk = [int(x) for x in input().split()]
 
-    p[i] = nk[0],nk[1],[]
-    for j in range(nk[0]):        
-        ihwl = [int(x) for x in input().split()]
-        p[i][2].append({"i":ihwl[0], "h":ihwl[1], "w":ihwl[2], "l":ihwl[3]})
+        if nk[0]>=1 and nk[0]<=100000:
+            if nk[1]>=1 and nk[1]<=nk[0]:
+                p[i] = nk[0],nk[1],[]
+                for j in range(nk[0]):
+                    ihwl = [int(x) for x in input().split()]
+                    p[i][2].append([ihwl[0],(ihwl[1] * ihwl[2] * ihwl[3])])
+                
+                p[i][2].sort(key=lambda x: x[0],reverse=False)
+                p[i][2].sort(key=lambda x: x[1],reverse=True)
+                
+                if p[i][1] == 1:
+                    del p[i][2][-(nk[1]):]
+                else: 
+                    del p[i][2][-(nk[1]-1):]
 
-t = len(p)
-for t in range(len(p)):
-    r = [] 
-    n = p[t][0]
-    k = p[t][1]
-    for n in range(len(p[t][2])):
-        p[t][2][n] = p[t][2][n]["i"],(p[t][2][n]["h"] * p[t][2][n]["w"] * p[t][2][n]["l"])
-    p[t][2].sort(key=lambda x: x[1],reverse=True)
-    for i in range(k): 
-        r.append(p[t][2][i][0])
-    print(*r, sep = " ")
+    for i in range(t):
+        r = []
+        for j in range(p[i][1]):
+            r.append(p[i][2][j][0])
+        print(*r, sep = " ")
