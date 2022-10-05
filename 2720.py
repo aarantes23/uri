@@ -42,14 +42,15 @@ if t<=20:
                 for j in range(n):
                     id,h,w,l = map(int, input().split())
                     p[i][2].append([id,(h * w * l)])
-                
-                p[i][2].sort(key=lambda x: x[0],reverse=False)
-                p[i][2].sort(key=lambda x: x[1],reverse=True)
-                
-                if p[i][1] == 1:
-                    del p[i][2][-(k):]
-                else: 
-                    del p[i][2][-(k-1):]
+
+    for i in range(t):
+        p[i][2].sort(key=lambda x: x[0],reverse=False)
+        p[i][2].sort(key=lambda x: x[1],reverse=True)
+        
+        if p[i][1] == 1:
+            del p[i][2][-(p[i][1]):]
+        else: 
+            del p[i][2][-((p[i][1])-1):]
 
     for i in range(t):
         r = []
