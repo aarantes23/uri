@@ -34,22 +34,22 @@ p = [None] * t
 
 if t<=20:
     for i in range(t):
-        nk = [int(x) for x in input().split()]
+        n, k = map(int, input().split())
 
-        if nk[0]>=1 and nk[0]<=100000:
-            if nk[1]>=1 and nk[1]<=nk[0]:
-                p[i] = nk[0],nk[1],[]
-                for j in range(nk[0]):
-                    ihwl = [int(x) for x in input().split()]
-                    p[i][2].append([ihwl[0],(ihwl[1] * ihwl[2] * ihwl[3])])
+        if n>=1 and n<=100000:
+            if k>=1 and k<=n:
+                p[i] = n,k,[]
+                for j in range(n):
+                    id,h,w,l = map(int, input().split())
+                    p[i][2].append([id,(h * w * l)])
                 
                 p[i][2].sort(key=lambda x: x[0],reverse=False)
                 p[i][2].sort(key=lambda x: x[1],reverse=True)
                 
                 if p[i][1] == 1:
-                    del p[i][2][-(nk[1]):]
+                    del p[i][2][-(k):]
                 else: 
-                    del p[i][2][-(nk[1]-1):]
+                    del p[i][2][-(k-1):]
 
     for i in range(t):
         r = []
